@@ -78,6 +78,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         notifyItemInserted(events.size() - 1);
     }
 
+    public void deleteEvent(int position) {
+        events.remove(position);
+        notifyItemRemoved(position);
+    }
+
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
     }

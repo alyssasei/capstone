@@ -31,10 +31,13 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View v, int position) {
+            public void onItemClick(View v, final int position) {
                 new AlertDialog.Builder(MainActivity.this).setItems(new CharSequence[]{"Add to calendar", "Delete"}, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if(which == 1) {
+                            adapter.deleteEvent(position);
+                        }
                         dialog.dismiss();
                     }
                 }).show();
