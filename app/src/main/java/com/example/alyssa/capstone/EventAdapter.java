@@ -16,14 +16,28 @@ import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
 
+
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView duration;
+        public static OnItemClickListener listener;
 
         public ViewHolder(View v) {
             super(v);
             title = (TextView) v.findViewById(R.id.EventName);
             duration = (TextView) v.findViewById(R.id.Duration);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null) {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(v, position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -62,5 +76,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public void addEvent(Event e) {
         events.add(e);
         notifyItemInserted(events.size() - 1);
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        ViewHolder.listener = listener;
     }
 }

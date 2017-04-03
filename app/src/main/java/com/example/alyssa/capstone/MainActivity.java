@@ -1,8 +1,10 @@
 package com.example.alyssa.capstone;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +28,18 @@ public class MainActivity extends AppCompatActivity {
 
         arrayList = new ArrayList<>();
         final EventAdapter adapter = new EventAdapter(arrayList, this);
+
+        adapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                new AlertDialog.Builder(MainActivity.this).setItems(new CharSequence[]{"Add to calendar", "Delete"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
