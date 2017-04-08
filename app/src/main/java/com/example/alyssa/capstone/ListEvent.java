@@ -4,11 +4,11 @@ package com.example.alyssa.capstone;
  * Created by Alyssa on 3/21/2017.
  */
 
-public class Event {
+public class ListEvent {
     private String title;
     private int minutes;
 
-    public Event(String s, int m) {
+    public ListEvent(String s, int m) {
         title = s;
         minutes = m;
     }

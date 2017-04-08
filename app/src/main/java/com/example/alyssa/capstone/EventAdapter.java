@@ -17,6 +17,9 @@ import java.util.List;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
 
 
+    public ListEvent getEvent(int position) {
+        return events.get(position);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
@@ -41,10 +44,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         }
     }
 
-    private List<Event> events;
+    private List<ListEvent> events;
     private Context context;
 
-    public EventAdapter(List<Event> e, Context c) {
+    public EventAdapter(List<ListEvent> e, Context c) {
         events = e;
         context = c;
     }
@@ -63,7 +66,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(EventAdapter.ViewHolder holder, int position) {
-        Event event = events.get(position);
+        ListEvent event = events.get(position);
         holder.title.setText(event.getTitle());
         holder.duration.setText(Integer.toString(event.getMinutes()));
     }
@@ -73,7 +76,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         return events.size();
     }
 
-    public void addEvent(Event e) {
+    public void addEvent(ListEvent e) {
         events.add(e);
         notifyItemInserted(events.size() - 1);
     }
